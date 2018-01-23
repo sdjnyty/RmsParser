@@ -1,0 +1,189 @@
+"Name"     = 'rms script'
+"Author"   = 'yty'
+"Version"  = '0.1'
+"About"    = ''
+"Case Sensative"='true'
+"Start Symbol" = <Sections>
+                 
+{IdentifierBody}={AlphaNumeric}+[_]
+
+Identifier={Letter}{IdentifierBody}+
+          
+Integer={Number}+
+               
+LeftBraceToken='{'
+         
+RightBraceToken='}'
+          
+StartRandomToken='start_random'
+                
+EndRandomToken='end_random'
+              
+DefineToken='#define'
+           
+PercentChanceToken='percent_chance'
+                  
+IfToken='if'
+       
+ElseIfToken='elseif'
+           
+ElseToken='else'
+         
+EndIfToken='endif'
+          
+Comment Start='/*'
+                  
+Comment End='*/'
+            
+<DefineStatement>::=DefineToken Identifier
+
+<PercentStatement>::=PercentChanceToken Integer <Statements>
+                   
+<PercentStatements>::=<PercentStatements><PercentStatement>
+                    |<PercentStatement>
+                    
+<RandomStatement>::=StartRandomToken<PercentStatements>EndRandomToken
+              
+<SectionHeader>::='<PLAYER_SETUP>'
+                |'<LAND_GENERATION>'
+                |'<ELEVATION_GENERATION>'
+                |'<CLIFF_GENERATION>'
+                |'<TERRAIN_GENERATION>'
+                |'<CONNECTION_GENERATION>'
+                |'<OBJECTS_GENERATION>'               
+               
+<Block>::=LeftBraceToken<Statements>RightBraceToken
+              
+<ElseIfClause>::=ElseIfToken<Statements>
+             
+<ElseIfClauses>::=<ElseIfClauses><ElseIfClause>
+                |<ElseIfClause>
+                |
+
+<ElseClauseOpt>::=ElseToken<Statements>
+                |              
+                
+<IfStatement>::=IfToken Identifier <Statements> <ElseIfClauses><ElseClauseOpt> EndIfToken
+              
+<Statement>::=<RandomStatement>
+            |<DefineStatement>
+            |<IfStatement>
+            |<0ArgStatement>
+            |<IdStatement>
+            |<NumStatement>
+            |<BlockStatement>
+            |<NumNumStatement>
+            |<NumBlockStatement>
+            |<IdBlockStatement>
+            |<IdIdStatement>
+            |<IdNumStatement>
+            |<IdNumNumStatement>
+            |<AiInfoMapTypeStatement>
+            
+<Statements>::=<Statements><Statement>
+             |<Statement>
+             
+<Section>::=<SectionHeader><Statements>
+          
+<Sections>::=<Sections><Section>
+           |<Section>
+
+<0ArgStatement>::=random_placement  
+                |grouped_by_team
+                |nomad_resources 
+                |set_zone_randomly  
+                |set_zone_by_team
+                |set_scale_by_size
+                |set_scale_by_groups
+                |set_avoid_player_start_areas
+                |set_flat_terrain_only
+                |set_scaling_to_map_size  
+                |set_scaling_to_player_number
+                |set_place_for_every_player
+                |set_gaia_object_only
+                |set_tight_grouping  
+                |set_loose_grouping
+                
+<IdStatementName>::=base_terrain
+                  |terrain_type 
+                  |default_terrain_replacement  
+                  |terrain_to_place_on 
+                  |ai_info_map_type 
+                  
+<IdStatement>::=<IdStatementName>Identifier
+                  
+<NumStatementName>::=land_percent 
+                   |number_of_tiles 
+                   |base_size 
+                   |base_elevation 
+                   |left_border 
+                   |right_border 
+                   |top_border 
+                   |bottom_border 
+                   |border_fuzziness                   
+                   |clumping_factor 
+                   |zone
+                   |other_zone_avoidance_distance 
+                   |land_id 
+                   |assign_to_player 
+                   |number_of_clumps 
+                   |spacing
+                   |min_number_of_cliffs
+                   |max_number_of_cliffs 
+                   |min_length_of_cliff
+                   |max_length_of_cliff 
+                   |cliff_curliness 
+                   |min_distance_cliffs 
+                   |min_terrain_distance 
+                   |spacing_to_other_terrain_types 
+                   |number_of_objects 
+                   |number_of_groups 
+                   |group_variance 
+                   |min_distance_to_players 
+                   |max_distance_to_players 
+                   |max_distance_to_other_zones 
+                   |min_distance_group_placement 
+                   |temp_min_distance_group_placement 
+                   |group_placement_radius 
+                   |place_on_specific_land_id 
+                   |resource_delta 
+                   
+<NumStatement>::=<NumStatementName>Integer
+              
+<BlockStatementName>::=create_player_lands
+                     |create_land
+                     |create_connect_all_players_land  
+                     |create_connect_teams_lands  
+                     |create_connect_all_lands  
+                     |create_connect_same_land_zones
+                     
+<BlockStatement>::=<BlockStatementName><Block>
+                     
+<NumNumStatementName>::=land_position 
+                      |height_limits 
+                      
+<NumNumStatement>::=<NumNumStatementName>Integer Integer
+                      
+<NumBlockStatementName>::=create_elevation  
+                        
+<NumBlockStatement>::=<NumBlockStatementName>Integer<Block>
+                        
+<IdBlockStatementName>::=create_terrain 
+                       |create_object 
+
+<IdBlockStatement>::=<IdBlockStatementName>Identifier<Block>
+                                          
+<IdIdStatementName>::=replace_terrain 
+                    
+<IdIdStatement>::=<IdIdStatementName>Identifier Identifier
+                    
+<IdNumStatementName>::=terrain_cost 
+                     
+<IdNumStatement>::=<IdNumStatementName>Identifier Integer
+                     
+<IdNumNumStatementName>::=terrain_size    
+                        
+<IdNumNumStatement>::=<IdNumNumStatementName>Identifier Integer Integer
+                    
+<AiInfoMapTypeStatement>::=ai_info_map_type Identifier
+                         |ai_info_map_type Identifier Integer Integer Integer                  

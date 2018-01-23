@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="GOLD Engine">
+      <HintPath>..\lib\GOLD Engine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
