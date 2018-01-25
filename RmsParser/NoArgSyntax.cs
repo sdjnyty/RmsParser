@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RmsParser
 {
-  public class NoArgStatement:SyntaxNonTerminal
+  public class NoArgSyntax:SyntaxNonTerminal
   {
     public string Name { get; set; }
 
-    public NoArgStatement(string name)
+    public NoArgSyntax(string name)
     {
       Name = name;
     }

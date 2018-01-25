@@ -43,9 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlockSyntax.cs" />
     <Compile Include="DefineSyntax.cs" />
-    <Compile Include="IdStatementSyntax.cs" />
-    <Compile Include="NamedStatement.cs" />
+    <Compile Include="ElseIfSyntax.cs" />
+    <Compile Include="IdBlockSyntax.cs" />
+    <Compile Include="IdSyntax.cs" />
+    <Compile Include="IfSyntax.cs" />
+    <Compile Include="NoArgSyntax.cs" />
+    <Compile Include="NumBlockSyntax.cs" />
+    <Compile Include="NumSyntax.cs" />
     <Compile Include="PercentChanceSyntax.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomSyntax.cs" />

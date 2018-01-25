@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace RmsParser
 {
-  public class IdStatementSyntax:NoArgStatement
+  public class NumSyntax:NoArgSyntax
   {
-    public string Id { get; set; }
+    public int Num { get; set; }
 
-    public IdStatementSyntax(string name,string id)
+    public NumSyntax(string name, int num)
       :base(name)
     {
-      Id = id;
+      Num = num;
     }
   }
 }
